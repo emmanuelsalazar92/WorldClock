@@ -11,7 +11,7 @@ const TimeComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam', {
+        const response = await axios.get('https://clock-api-two.vercel.app/current-time?timeZone=America/Costa_Rica', {
           headers: {
             'Content-Type': 'application/json',
           }

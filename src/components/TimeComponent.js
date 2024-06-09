@@ -1,28 +1,28 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CardContent, Card } from "@/components/ui/card"
+import { CardContent, Card } from "@/components/ui/card";
 
 const monthNames = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-const TimeComponent = ({IANA, city, bg}) => {
+const TimeComponent = ({ IANA, city, bg }) => {
   const [timeData, setTimeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const timeZone = IANA
-  
-  if (!timeZone) {
-      return res.status(400).json({ error: 'timeZone query parameter is required' });
-  }
-
   useEffect(() => {
     const fetchData = async () => {
+      if (!IANA) {
+        setError(new Error('timeZone query parameter is required'));
+        setLoading(false);
+        return;
+      }
+
       try {
-        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${(timeZone)}`, {
+        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${encodeURIComponent(IANA)}`, {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -34,10 +34,9 @@ const TimeComponent = ({IANA, city, bg}) => {
         setLoading(false);
       }
     };
-  
+
     fetchData();
-  }, []);
-  
+  }, [IANA]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -45,13 +44,12 @@ const TimeComponent = ({IANA, city, bg}) => {
   return (
     <div>
       {timeData && (
-        
         <div>
-          <Card className="text-white" style={{backgroundColor: bg}}>
+          <Card className="text-white" style={{ backgroundColor: bg }}>
             <CardContent className="p-6 flex flex-col items-center justify-center">
               <div className="text-4xl font-bold">{timeData.time}</div>
               <div className="text-sm mt-2">{city}</div>
-              <div className="text-sm mt-1">{monthNames[timeData.month-1]} {timeData.day}, {timeData.year}</div>
+              <div className="text-sm mt-1">{monthNames[timeData.month - 1]} {timeData.day}, {timeData.year}</div>
             </CardContent>
           </Card>
         </div>

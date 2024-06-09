@@ -8,13 +8,13 @@ const monthNames = [
   "July", "August", "September", "October", "November", "December"
 ];
 
-const TimeComponent = (props) => {
+const TimeComponent = ({IANA, city, bg}) => {
   const [timeData, setTimeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const timeZone = this.props.IANA
-
+  const timeZone = IANA
+  
   if (!timeZone) {
       return res.status(400).json({ error: 'timeZone query parameter is required' });
   }
@@ -22,7 +22,7 @@ const TimeComponent = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${encodeURIComponent(timeZone)}`, {
+        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${(timeZone)}`, {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -47,10 +47,10 @@ const TimeComponent = (props) => {
       {timeData && (
         
         <div>
-          <Card className="text-white" style={{backgroundColor: '#FF6B6B'}}>
+          <Card className="text-white" style={{backgroundColor: bg}}>
             <CardContent className="p-6 flex flex-col items-center justify-center">
               <div className="text-4xl font-bold">{timeData.time}</div>
-              <div className="text-sm mt-2">{this.props.city}</div>
+              <div className="text-sm mt-2">{city}</div>
               <div className="text-sm mt-1">{monthNames[timeData.month-1]} {timeData.day}, {timeData.year}</div>
             </CardContent>
           </Card>

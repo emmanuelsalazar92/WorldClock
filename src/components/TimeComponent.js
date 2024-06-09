@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CardContent, Card } from "@/components/ui/card"
 
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 const TimeComponent = () => {
   const [timeData, setTimeData] = useState(null);
@@ -34,8 +38,8 @@ const TimeComponent = () => {
 
   return (
     <div>
-      <h1>Current Time in Amsterdam</h1>
       {timeData && (
+        
         <div>
 {/*           <p>Year: {timeData.year}</p>
           <p>Month: {timeData.month}</p>
@@ -50,11 +54,11 @@ const TimeComponent = () => {
           <p>TimeZone: {timeData.timeZone}</p>
           <p>DayOfWeek: {timeData.dayOfWeek}</p>
           <p>DST Active: {timeData.dstActive ? 'Yes' : 'No'}</p> */}
-                  <Card className="bg-[#FF6B6B] text-white">
+                  <Card className="text-white" style="background-color: #FF6B6B">
                   <CardContent className="p-6 flex flex-col items-center justify-center">
           <div className="text-4xl font-bold">{timeData.time}</div>
           <div className="text-sm mt-2">{timeData.timeZone}</div>
-          <div className="text-sm mt-1">{timeData.date}</div>
+          <div className="text-sm mt-1">{monthNames[timeData.month]} {timeData.day}, {timeData.year}</div>
           </CardContent>
           </Card>
         </div>

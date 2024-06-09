@@ -54,7 +54,7 @@ const TimeComponent = () => {
           <p>TimeZone: {timeData.timeZone}</p>
           <p>DayOfWeek: {timeData.dayOfWeek}</p>
           <p>DST Active: {timeData.dstActive ? 'Yes' : 'No'}</p> */}
-                  <Card className="text-white" style="background-color: #FF6B6B">
+                  <Card className="text-white" style={{backgroundColor: '#FF6B6B'}}>
                   <CardContent className="p-6 flex flex-col items-center justify-center">
           <div className="text-4xl font-bold">{timeData.time}</div>
           <div className="text-sm mt-2">{timeData.timeZone}</div>

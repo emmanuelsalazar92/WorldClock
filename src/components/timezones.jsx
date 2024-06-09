@@ -26,7 +26,9 @@ export function Timezones() {
       <h1 className="text-2xl font-bold mb-6">World Clock</h1>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <TimeComponent/>  
+        <TimeComponent IANA="America/La_Paz" city="Bolivia"/> 
+        <TimeComponent IANA="America/Costa_Rica" city="Costa Rica"/> 
+        <TimeComponent IANA="America/Santo_Domingo" city="Republica Dominicana"/>  
         <Card className="bg-[#FF6B6B] text-white">
           <CardContent className="p-6 flex flex-col items-center justify-center">
             <div className="text-4xl font-bold">12:34</div>

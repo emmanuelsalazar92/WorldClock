@@ -8,15 +8,21 @@ const monthNames = [
   "July", "August", "September", "October", "November", "December"
 ];
 
-const TimeComponent = () => {
+const TimeComponent = (props) => {
   const [timeData, setTimeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const timeZone = this.props.IANA
+
+  if (!timeZone) {
+      return res.status(400).json({ error: 'timeZone query parameter is required' });
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://clock-api-two.vercel.app/current-time?timeZone=America/Costa_Rica', {
+        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${encodeURIComponent(timeZone)}`, {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -41,25 +47,12 @@ const TimeComponent = () => {
       {timeData && (
         
         <div>
-{/*           <p>Year: {timeData.year}</p>
-          <p>Month: {timeData.month}</p>
-          <p>Day: {timeData.day}</p>
-          <p>Hour: {timeData.hour}</p>
-          <p>Minute: {timeData.minute}</p>
-          <p>Seconds: {timeData.seconds}</p>
-          <p>Milliseconds: {timeData.milliSeconds}</p>
-          <p>DateTime: {timeData.dateTime}</p>
-          <p>Date: {timeData.date}</p>
-          <p>Time: {timeData.time}</p>
-          <p>TimeZone: {timeData.timeZone}</p>
-          <p>DayOfWeek: {timeData.dayOfWeek}</p>
-          <p>DST Active: {timeData.dstActive ? 'Yes' : 'No'}</p> */}
-                  <Card className="text-white" style={{backgroundColor: '#FF6B6B'}}>
-                  <CardContent className="p-6 flex flex-col items-center justify-center">
-          <div className="text-4xl font-bold">{timeData.time}</div>
-          <div className="text-sm mt-2">{timeData.timeZone}</div>
-          <div className="text-sm mt-1">{monthNames[timeData.month]} {timeData.day}, {timeData.year}</div>
-          </CardContent>
+          <Card className="text-white" style={{backgroundColor: '#FF6B6B'}}>
+            <CardContent className="p-6 flex flex-col items-center justify-center">
+              <div className="text-4xl font-bold">{timeData.time}</div>
+              <div className="text-sm mt-2">{this.props.city}</div>
+              <div className="text-sm mt-1">{monthNames[timeData.month-1]} {timeData.day}, {timeData.year}</div>
+            </CardContent>
           </Card>
         </div>
       )}

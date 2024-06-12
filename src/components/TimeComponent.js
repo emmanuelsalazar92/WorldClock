@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CardContent, Card } from "@/components/ui/card";
+import { TimeIcon } from "./ui/timeicon";
 
 const monthNames = [
   "January", "February", "March", "April", "May", "June",
@@ -46,6 +47,7 @@ const TimeComponent = ({ IANA, city, bg }) => {
       {timeData && (
         <div>
           <Card className="text-white" style={{ backgroundColor: bg }}>
+            <TimeIcon hour24={timeData.hour}/>
             <CardContent className="p-6 flex flex-col items-center justify-center">
               <div className="text-4xl font-bold">{timeData.time}</div>
               <div className="text-sm mt-2">{city}</div>

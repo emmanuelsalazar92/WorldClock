@@ -29,7 +29,7 @@ switch (determinePeriod(hour)) {
 
 export function TimeIcon({hour24}) {
     return (
-        <div className="material-icons absolute top-0 right-0 m-2 text-3xl">
+        <div className="material-icons absolute m-2 text-3xl">
         {getIcon(hour24)}
       </div>
     );

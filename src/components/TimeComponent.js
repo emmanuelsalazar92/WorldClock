@@ -23,7 +23,7 @@ const TimeComponent = ({ IANA, city, bg }) => {
       }
 
       try {
-        const response = await axios.get(`https://clock-api-two.vercel.app/current-time?timeZone=${encodeURIComponent(IANA)}`, {
+        const response = await axios.get(`https://ersa-clientapi-clock.vercel.app/current-time?timeZone=${encodeURIComponent(IANA)}`, {
           headers: {
             'Content-Type': 'application/json',
           }

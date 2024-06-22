@@ -1,9 +1,10 @@
-import { Timezones } from "@/components/timezones";
+import { WeatherTimeZone } from "@/components/weather-time-zone";
 
 export default function Home() {
   return (
     <dev>
-    <Timezones/>
+
+    <WeatherTimeZone/>
     </dev>
   );
 }
